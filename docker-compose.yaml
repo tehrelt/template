@@ -1,0 +1,18 @@
+services:
+  pg:
+    image: postgres:14.13-alpine3.20
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${PG_NAME}
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASS}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - ${PG_PORT}:5432
+
+volumes:
+  pg_data:
+    name: icyre-users-pg
