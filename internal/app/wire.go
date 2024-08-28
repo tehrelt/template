@@ -10,8 +10,8 @@ import (
 	_ "github.com/jackc/pgx/stdlib"
 	"github.com/jmoiron/sqlx"
 	"gitverse.ru/icyre/template/internal/config"
-	"gitverse.ru/icyre/template/internal/server"
 	"gitverse.ru/icyre/template/internal/storage/pg"
+	server "gitverse.ru/icyre/template/internal/transport/grpc"
 )
 
 func New() (*App, func(), error) {

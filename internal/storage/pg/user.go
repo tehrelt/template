@@ -45,7 +45,7 @@ func (u *Storage) Create(ctx context.Context, cu *dto.CreateEntity) (*entity.Ent
 		if e, ok := err.(pgx.PgError); ok {
 			log.Debug("pg error", sl.PgError(e))
 			if e.Code == "23505" {
-				return nil, storage.ErrUserAlreadyExists
+				return nil, storage.ErrAlreadyExists
 			}
 		}
 
@@ -77,7 +77,7 @@ func (u *Storage) Delete(ctx context.Context, id string) error {
 		if e, ok := err.(pgx.PgError); ok {
 			log.Debug("pg error", sl.PgError(e))
 			if e.Code == "22P02" {
-				return storage.ErrUserNotFound
+				return storage.ErrNotFound
 			}
 		}
 
@@ -135,7 +135,7 @@ func (u *Storage) Find(ctx context.Context, id string) (*entity.Entity, error) {
 		if e, ok := err.(pgx.PgError); ok {
 			log.Debug("pg error", sl.PgError(e))
 			if e.Code == "22P02" {
-				return nil, storage.ErrUserNotFound
+				return nil, storage.ErrNotFound
 			}
 		}
 
@@ -182,7 +182,7 @@ func (u *Storage) Update(ctx context.Context, dto *dto.UpdateEntity) (*entity.En
 		if e, ok := err.(pgx.PgError); ok {
 			log.Debug("pg error", sl.PgError(e))
 			if e.Code == "22P02" {
-				return nil, storage.ErrUserNotFound
+				return nil, storage.ErrNotFound
 			}
 		}
 
